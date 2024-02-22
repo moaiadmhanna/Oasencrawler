@@ -5,7 +5,7 @@
 class Charkter
 {
     public:
-        Charkter()
+        Charkter();
         ~Charkter();
         int x;
         int y;
