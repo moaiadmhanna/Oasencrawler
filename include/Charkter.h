@@ -6,7 +6,7 @@ class Charkter
 {
     public:
         Charkter();
-        ~Charkter();
+        virtual ~Charkter();
         int x;
         int y;
         int lifePoints;
