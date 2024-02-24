@@ -71,7 +71,7 @@ int main()
             cout<<"Current Level: "<< Level <<endl;
             if(player1.lifePoints <= 0){
                 cout << "GAME OVER" << endl;
-                cout << "Your best score is:" << player1.relicPoint << endl;
+                cout << "You collected :" << player1.relicPoint << "Relic Points" << endl;
                 return 0;
             }
             while(!player1.move()){
