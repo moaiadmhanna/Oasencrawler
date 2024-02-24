@@ -62,14 +62,21 @@ int main()
     Charkter player1;
     int Level = 0;
     char worldfield[5][5];
-    while(player1.lifePoints > 0){
+    while(true){
         int relcPoints = worldGenerator(worldfield);
         worldPrinter(player1,worldfield);
         cout <<"HP: " << player1.lifePoints <<endl;
         cout<< "Relic Points: " << player1.relicPoint << endl;
         while(relcPoints != 0){
             cout<<"Current Level: "<< Level <<endl;
-            player1.move();
+            if(player1.lifePoints <= 0){
+                cout << "GAME OVER" << endl;
+                cout << "Your best score is:" << player1.relicPoint << endl;
+                return 0;
+            }
+            while(!player1.move()){
+
+            }
             system("cls");
             switch (worldfield[player1.x][player1.y]){
                 case 'H':

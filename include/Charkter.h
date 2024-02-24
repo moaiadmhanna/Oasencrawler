@@ -14,7 +14,7 @@ class Charkter
         int y;
         int lifePoints;
         int relicPoint;
-        void move();
+        bool move();
         void takeDamage();
         void heal();
         void increaseRelicPoints();

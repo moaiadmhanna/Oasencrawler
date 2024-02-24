@@ -14,7 +14,7 @@ Charkter::Charkter()
 {
     this->x = 0;
     this->y = 0;
-    this->lifePoints = 5;
+    this->lifePoints = 1;
     this->relicPoint =0;
 }
 
@@ -22,7 +22,7 @@ Charkter::~Charkter()
 {
     //dtor
 }
-void Charkter::move()
+bool Charkter::move()
 {
     cout << "Please enter your Movement (Up(U)-Down(D)-Left(L)-Right(R))" << endl;
     char input;
@@ -30,31 +30,34 @@ void Charkter::move()
     switch (input)
     {
         case 'U':
+        case 'u':
             if(this->x > 0){
                this->x--;
             }
-            break;
+            return true;
         case 'D':
+        case 'd':
             if(this->x < 4){
                this->x++;
             }
-            break;
+            return true;
         case 'L':
+        case 'l':
             if(this->y > 0){
                this->y--;
             }
-            break;
+            return true;
         case 'R':
+        case 'r':
             if(this->y < 4){
                this->y++;
             }
-            break;
+            return true;
         default:
             cout << "Invalid Move" << endl;
-            break;
+            return false;
 
     }
-
 }
 void Charkter::takeDamage(){
     srand(time(0));
