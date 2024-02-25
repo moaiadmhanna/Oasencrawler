@@ -13,6 +13,8 @@ class Charkter
         bool move();
         int x;
         int y;
+        int lifePoints;
+        int relicPoint;
         void takeDamage();
         void heal();
         void increaseRelicPoints();
@@ -20,8 +22,6 @@ class Charkter
     protected:
 
     private:
-        int lifePoints;
-        int relicPoint;
 };
 
 #endif // CHARKTER_H
