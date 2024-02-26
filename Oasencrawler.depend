@@ -1,14 +1,28 @@
 # depslib dependency file v1.0
-1708643261 source:d:\fh technikum\c++\oasencrawler\src\charkter.cpp
+1708828582 source:d:\fh technikum\c++\oasencrawler\src\charkter.cpp
 	"Charkter.h"
-
-1708643947 d:\fh technikum\c++\oasencrawler\include\charkter.h
-
-1708644637 source:d:\fh technikum\c++\oasencrawler\main.cpp
 	<iostream>
 	<time.h>
 
-1708963872 source:c:\users\pc\desktop\c++\oasencrawler\main.cpp
+1708828582 D
+
+1708964570 source:c:\users\pc\desktop\c++\oasencrawler\main.cpp
+	<iostream>
+	<time.h>
+	<Charkter.h>
+	<windows.h>
+	<Enemy.h>
+
+1708829007 d:\fh technikum\c++\oasencrawler\include\charkter.h
+	<iostream>
+
+1708828582 source:d:\fh technikum\c++\oasencrawler\main.cpp
+	<iostream>
+	<time.h>
+	<Charkter.h>
+	<windows.h>
+
+1708771832 cf9be772a0aa41ffd2189f85118760134d1e3
 	<iostream>
 	<time.h>
 	<Charkter.h>
@@ -20,7 +34,7 @@
 	<iostream>
 	<time.h>
 
-1708952094 c:\users\pc\desktop\c++\oasencrawler\include\charkter.h
+1708964886 c:\users\pc\desktop\c++\oasencrawler\include\charkter.h
 	<iostream>
 
 1708946659 c:\users\pc\desktop\c++\oasencrawler\include\enemy.h
