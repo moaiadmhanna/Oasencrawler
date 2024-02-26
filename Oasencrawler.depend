@@ -6,7 +6,7 @@
 
 1708828582 D
 
-1708964570 source:c:\users\pc\desktop\c++\oasencrawler\main.cpp
+1708968691 source:c:\users\pc\desktop\c++\oasencrawler\main.cpp
 	<iostream>
 	<time.h>
 	<Charkter.h>
@@ -37,9 +37,9 @@
 1708964886 c:\users\pc\desktop\c++\oasencrawler\include\charkter.h
 	<iostream>
 
-1708946659 c:\users\pc\desktop\c++\oasencrawler\include\enemy.h
+1708968704 c:\users\pc\desktop\c++\oasencrawler\include\enemy.h
 
-1708952021 source:c:\users\pc\desktop\c++\oasencrawler\src\enemy.cpp
+1708968754 source:c:\users\pc\desktop\c++\oasencrawler\src\enemy.cpp
 	"Enemy.h"
 	<iostream>
 	<time.h>

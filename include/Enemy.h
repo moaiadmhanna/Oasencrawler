@@ -10,7 +10,7 @@ class Enemy
         int x;
         int y;
         int attackEnergy;
-        void follow(int x, int y);
+        void follow();
         void move(int x, int y);
 
     protected:
