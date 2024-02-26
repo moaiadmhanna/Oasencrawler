@@ -14,7 +14,7 @@ Charkter::Charkter()
 {
     this->x = 0;
     this->y = 0;
-    this->lifePoints = 1;
+    this->lifePoints = 4;
     this->relicPoint =0;
 }
 
@@ -59,11 +59,16 @@ bool Charkter::move()
 
     }
 }
-void Charkter::takeDamage(){
-    srand(time(0));
-    int randomNumber = 1 + rand()%6;
-    if(randomNumber == 1){
-        this->lifePoints--;
+void Charkter::takeDamage(int x){
+    if(x == 1){
+        srand(time(0));
+        int randomNumber = 1 + rand()%6;
+        if(randomNumber == 1){
+            this->lifePoints--;
+        }
+    }
+    else{
+        this->lifePoints -= x;
     }
 }
 void Charkter::heal(){

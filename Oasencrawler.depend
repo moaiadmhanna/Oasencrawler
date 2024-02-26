@@ -8,17 +8,25 @@
 	<iostream>
 	<time.h>
 
-1708771832 source:c:\users\pc\desktop\c++\oasencrawler\main.cpp
+1708963872 source:c:\users\pc\desktop\c++\oasencrawler\main.cpp
 	<iostream>
 	<time.h>
 	<Charkter.h>
 	<windows.h>
+	<Enemy.h>
 
-1708772033 source:c:\users\pc\desktop\c++\oasencrawler\src\charkter.cpp
+1708964107 source:c:\users\pc\desktop\c++\oasencrawler\src\charkter.cpp
 	"Charkter.h"
 	<iostream>
 	<time.h>
 
-1708772484 c:\users\pc\desktop\c++\oasencrawler\include\charkter.h
+1708952094 c:\users\pc\desktop\c++\oasencrawler\include\charkter.h
 	<iostream>
+
+1708946659 c:\users\pc\desktop\c++\oasencrawler\include\enemy.h
+
+1708952021 source:c:\users\pc\desktop\c++\oasencrawler\src\enemy.cpp
+	"Enemy.h"
+	<iostream>
+	<time.h>
 

@@ -7,6 +7,11 @@ class Enemy
     public:
         Enemy();
         virtual ~Enemy();
+        int x;
+        int y;
+        int attackEnergy;
+        void follow(int x, int y);
+        void move(int x, int y);
 
     protected:
 

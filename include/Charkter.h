@@ -10,18 +10,18 @@ class Charkter
     public:
         Charkter();
         virtual ~Charkter();
-        bool move();
         int x;
         int y;
-        void takeDamage();
+        int lifePoints;
+        int relicPoint;
+        bool move();
+        void takeDamage(int x);
         void heal();
         void increaseRelicPoints();
 
     protected:
 
     private:
-        int lifePoints;
-        int relicPoint;
 };
 
 #endif // CHARKTER_H

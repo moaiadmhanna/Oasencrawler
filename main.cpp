@@ -2,6 +2,7 @@
 #include <time.h>
 #include <Charkter.h>
 #include <windows.h>
+#include <Enemy.h>
 
 using namespace std;
 
@@ -57,18 +58,42 @@ void worldPrinter(const Charkter &player, char (&worldfield)[5][5]){
     }
 }
 
+void enemyGenerator(int level, char (&worldfield)[5][5],Enemy (&enemyArray)[10]){
+    srand(time(0));
+    for(int i = 0; i < level; i++){
+        while(true){
+            int xTemp = rand()%5;
+            int yTemp = 0;
+            if(xTemp < 3){
+                yTemp = (rand()%2)+3;
+            }
+            else{
+                yTemp = rand()%5;
+            }
+            if((worldfield[xTemp][yTemp] != 'R') && (worldfield[xTemp][yTemp] != 'Y')){
+                enemyArray[i].move(xTemp,yTemp);
+                worldfield[xTemp][yTemp] = 'Y';
+                break;
+            }
+        }
+    }
+}
 int main()
 {
     Charkter player1;
-    int Level = 0;
+    int level = 1;
+    int cnt = 1;
     char worldfield[5][5];
+    Enemy enemyArray[10];
     while(true){
         int relcPoints = worldGenerator(worldfield);
+        if(level % 10 == 0){cnt++;};
+        enemyGenerator(cnt,worldfield,enemyArray);
         worldPrinter(player1,worldfield);
         cout <<"HP: " << player1.lifePoints <<endl;
         cout<< "Relic Points: " << player1.relicPoint << endl;
         while(relcPoints != 0){
-            cout<<"Current Level: "<< Level <<endl;
+            cout<<"Current level: "<< level <<endl;
             if(player1.lifePoints <= 0){
                 cout << "GAME OVER" << endl;
                 cout << "You collected :" << player1.relicPoint << "Relic Points" << endl;
@@ -77,13 +102,19 @@ int main()
             while(!player1.move()){
 
             }
+            for(int i = 0; i < cnt ; i++){
+                enemyArray[i].follow(player1.x,player1.y);
+            }
             system("cls");
             switch (worldfield[player1.x][player1.y]){
                 case 'H':
                     player1.heal();
                     break;
                 case 'D':
-                    player1.takeDamage();
+                    player1.takeDamage(1);
+                    break;
+                case 'Y':
+                    player1.takeDamage(2);
                     break;
                 case 'R':
                     player1.increaseRelicPoints();
@@ -99,10 +130,13 @@ int main()
         system("cls");
         player1.x = 0;
         player1.y = 0;
-        Level++;
+        for(int i = 0; i < cnt; i++){
+            enemyArray[i].x = 0;
+            enemyArray[i].y = 0;
+        }
+        level++;
     }
 
     return 0;
 }
-
     // ... . -. -.. / .... . .-.. .--. / .--. .-.. ...    -Mostafa Mhanna
