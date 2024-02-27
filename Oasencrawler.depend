@@ -44,3 +44,25 @@
 	<iostream>
 	<time.h>
 
+1709039240 source:m:\desktop\c++\oasencrawler\main.cpp
+	<iostream>
+	<time.h>
+	<Charkter.h>
+	<windows.h>
+	<Enemy.h>
+
+1709030885 m:\desktop\c++\oasencrawler\include\charkter.h
+	<iostream>
+
+1709037247 m:\desktop\c++\oasencrawler\include\enemy.h
+
+1709033113 source:m:\desktop\c++\oasencrawler\src\charkter.cpp
+	"Charkter.h"
+	<iostream>
+	<time.h>
+
+1709038297 source:m:\desktop\c++\oasencrawler\src\enemy.cpp
+	"Enemy.h"
+	<iostream>
+	<time.h>
+

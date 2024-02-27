@@ -30,25 +30,21 @@ bool Charkter::move()
     switch (input)
     {
         case 'U':
-        case 'u':
             if(this->x > 0){
                this->x--;
             }
             return true;
         case 'D':
-        case 'd':
             if(this->x < 4){
                this->x++;
             }
             return true;
         case 'L':
-        case 'l':
             if(this->y > 0){
                this->y--;
             }
             return true;
         case 'R':
-        case 'r':
             if(this->y < 4){
                this->y++;
             }

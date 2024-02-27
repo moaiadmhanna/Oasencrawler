@@ -35,8 +35,10 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="include/Charkter.h" />
+		<Unit filename="include/Enemy.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Charkter.cpp" />
+		<Unit filename="src/Enemy.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

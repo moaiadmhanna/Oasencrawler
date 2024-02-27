@@ -45,7 +45,7 @@ int  worldGenerator(char (&worldfield)[5][5])
     return relicGenerated;
 
 }
-void worldPrinter(const Charkter &player, char (&worldfield)[5][5], int cnt , Enemy (&enemyArray)[10]){
+void worldPrinter(const Charkter &player, char (&worldfield)[5][5], int cnt , const Enemy *enemy){
     for(int x = 0; x < 5; x++ ){
         for(int y = 0; y < 5; y++){
             bool checker = false;
@@ -54,7 +54,7 @@ void worldPrinter(const Charkter &player, char (&worldfield)[5][5], int cnt , En
                 continue;
             }
             for(int i = 0; i < cnt; i++){
-                if(enemyArray[i].x == x && enemyArray[i].y == y){
+                if(enemy->x == x && enemy->y == y){
                     cout << " Y";
                     checker = true;
                     continue;
@@ -66,8 +66,7 @@ void worldPrinter(const Charkter &player, char (&worldfield)[5][5], int cnt , En
         cout<<""<<endl;
     }
 }
-
-void enemyGenerator(int level, char (&worldfield)[5][5],Enemy (&enemyArray)[10]){
+void enemyGenerator(int level, char (&worldfield)[5][5],Enemy *enemy){
     srand(time(0));
     for(int i = 0; i < level; i++){
         while(true){
@@ -80,7 +79,7 @@ void enemyGenerator(int level, char (&worldfield)[5][5],Enemy (&enemyArray)[10])
                 yTemp = rand()%5;
             }
             if((worldfield[xTemp][yTemp] != 'R') && (worldfield[xTemp][yTemp] != 'Y')){
-                enemyArray[i].move(xTemp,yTemp);
+                enemy->move(xTemp,yTemp);
                 break;
             }
         }
@@ -89,15 +88,15 @@ void enemyGenerator(int level, char (&worldfield)[5][5],Enemy (&enemyArray)[10])
 int main()
 {
     Charkter player1;
-    int level = 9;
+    int level = 1;
     char worldfield[5][5];
-    Enemy enemyArray[10];
+    int cnt = 1;
     while(true){
         int relcPoints = worldGenerator(worldfield);
-        int cnt = 1;
         if(level % 10 == 0){cnt++;}
-        enemyGenerator(cnt,worldfield,enemyArray);
-        worldPrinter(player1,worldfield,cnt,enemyArray);
+        Enemy *enemy1 = new Enemy();
+        enemyGenerator(cnt,worldfield,enemy1);
+        worldPrinter(player1,worldfield,cnt,enemy1);
         cout <<"HP: " << player1.lifePoints <<endl;
         cout<< "Relic Points: " << player1.relicPoint << endl;
         while(relcPoints != 0){
@@ -111,13 +110,7 @@ int main()
 
             }
             for(int i = 0; i < cnt ; i++){
-                enemyArray[i].follow();
-                if(player1.x == enemyArray[i].x && player1.y == enemyArray[i].y){
-                    player1.takeDamage(2);
-                    enemyArray[i].x = 0;
-                    enemyArray[i].y = 0;
-                    cnt--;
-                }
+                enemy1->follow();
             }
             system("cls");
             switch (worldfield[player1.x][player1.y]){
@@ -133,18 +126,18 @@ int main()
                 default:
                     break;
             }
+            if(player1.x == enemy1->x && player1.y == enemy1->y){
+                player1.takeDamage(2);
+                delete(enemy1);
+            }
             worldfield[player1.x][player1.y] = '-';
-            worldPrinter(player1,worldfield,cnt,enemyArray);
+            worldPrinter(player1,worldfield,cnt,enemy1);
             cout <<"HP: " << player1.lifePoints <<endl;
             cout<< "Relic Points: " << player1.relicPoint << endl;
         }
         system("cls");
         player1.x = 0;
         player1.y = 0;
-        for(int i = 0; i < cnt; i++){
-            enemyArray[i].x = 0;
-            enemyArray[i].y = 0;
-        }
         level++;
     }
 

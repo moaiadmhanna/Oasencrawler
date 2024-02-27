@@ -14,41 +14,29 @@ Enemy::~Enemy()
 }
 void Enemy::follow(){
     srand(time(0));
-    int xPoistion = this->x;
-    int yPoistion = this->y;
     while(true){
-        int randPoistion = rand()%8 +1;
+        int randPoistion = rand()%5;
+        int xPoistion = this->x;
+        int yPoistion = this->y;
         switch (randPoistion){
+        case 0:
+            break;
         case 1:
-            this->x--;
+            xPoistion--;
             break;
         case 2:
-            this->x--;
-            this->y++;
+            yPoistion++;
             break;
         case 3:
-            this->y++;
+            xPoistion++;
             break;
         case 4:
-            this->x++;
-            this->y++;
-            break;
-        case 5:
-            this->x++;
-            break;
-        case 6:
-            this->x++;
-            this->y--;
-            break;
-        case 7:
-            this->y--;
-            break;
-        case 8:
-            this->x--;
-            this->y--;
+            yPoistion--;
             break;
     }
-    if(this->x < 5 && this->y < 5){
+    if(xPoistion < 5 && yPoistion < 5 && xPoistion > 0 && yPoistion >0){
+        this->x = xPoistion;
+        this->y = yPoistion;
         break;
     }
     }
