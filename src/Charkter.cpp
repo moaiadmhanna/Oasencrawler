@@ -12,15 +12,39 @@ enum movement{
 
 Charkter::Charkter()
 {
-    this->x = 0;
-    this->y = 0;
-    this->lifePoints = 4;
-    this->relicPoint =0;
+    this->setX(0);
+    this->setY(0);
+    this->setLifePoints(5);
+    this->setRelicPoints(0);
 }
 
 Charkter::~Charkter()
 {
     //dtor
+}
+int Charkter::getX() const{
+    return this->x;
+}
+int Charkter::getY() const{
+    return this->y;
+}
+int Charkter::getLifePoints() const{
+    return this->lifePoints;
+}
+int Charkter::getRelicPoints() const {
+    return this->relicPoints;
+}
+void Charkter::setX(int x){
+    this->x +=x;
+}
+void Charkter::setY(int y){
+    this->y+=y;
+}
+void Charkter::setLifePoints(int lifePoint){
+    this->lifePoints+=lifePoint;
+}
+void Charkter::setRelicPoints(int relicPoint){
+    this->relicPoints+=relicPoint;
 }
 bool Charkter::move()
 {
@@ -30,23 +54,23 @@ bool Charkter::move()
     switch (input)
     {
         case 'U':
-            if(this->x > 0){
-               this->x--;
+            if(this->getX() > 0){
+               this->setX(-1);
             }
             return true;
         case 'D':
-            if(this->x < 4){
-               this->x++;
+            if(this->getX() < 4){
+               this->setX(1);
             }
             return true;
         case 'L':
-            if(this->y > 0){
-               this->y--;
+            if(this->getY() > 0){
+               this->setY(-1);
             }
             return true;
         case 'R':
-            if(this->y < 4){
-               this->y++;
+            if(this->getY() < 4){
+               this->setY(1);
             }
             return true;
         default:
@@ -60,16 +84,16 @@ void Charkter::takeDamage(int x){
         srand(time(0));
         int randomNumber = 1 + rand()%6;
         if(randomNumber == 1){
-            this->lifePoints--;
+            this->setLifePoints(-1);
         }
     }
     else{
-        this->lifePoints -= x;
+        this->setLifePoints(x);
     }
 }
 void Charkter::heal(){
-    this->lifePoints++;
+    this->setLifePoints(1);
 }
 void Charkter::increaseRelicPoints(){
-    this->relicPoint++;
+    this->setRelicPoints(1);
 }

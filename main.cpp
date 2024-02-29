@@ -45,22 +45,13 @@ int  worldGenerator(char (&worldfield)[5][5])
     return relicGenerated;
 
 }
-void worldPrinter(const Charkter &player, char (&worldfield)[5][5], int cnt , const Enemy *enemy){
+void worldPrinter(Charkter* player, char (&worldfield)[5][5]){
     for(int x = 0; x < 5; x++ ){
         for(int y = 0; y < 5; y++){
-            bool checker = false;
-            if(player.x == x && player.y == y){
+            if(player->getX() == x && player->getY() == y){
                 cout <<" X";
                 continue;
             }
-            for(int i = 0; i < cnt; i++){
-                if(enemy->x == x && enemy->y == y){
-                    cout << " Y";
-                    checker = true;
-                    continue;
-                }
-            }
-            if(checker == true){continue;}
             cout <<" " << worldfield[x][y];
         }
         cout<<""<<endl;
@@ -87,60 +78,11 @@ void enemyGenerator(int level, char (&worldfield)[5][5],Enemy *enemy){
 }
 int main()
 {
-    Charkter player1;
+    Charkter* player1 = new Charkter();
     int level = 1;
     char worldfield[5][5];
-    int cnt = 1;
-    while(true){
-        int relcPoints = worldGenerator(worldfield);
-        if(level % 10 == 0){cnt++;}
-        Enemy *enemy1 = new Enemy();
-        enemyGenerator(cnt,worldfield,enemy1);
-        worldPrinter(player1,worldfield,cnt,enemy1);
-        cout <<"HP: " << player1.lifePoints <<endl;
-        cout<< "Relic Points: " << player1.relicPoint << endl;
-        while(relcPoints != 0){
-            cout<<"Current level: "<< level <<endl;
-            if(player1.lifePoints <= 0){
-                cout << "GAME OVER" << endl;
-                cout << "You collected : " << player1.relicPoint << "Relic Points" << endl;
-                return 0;
-            }
-            while(!player1.move()){
-
-            }
-            for(int i = 0; i < cnt ; i++){
-                enemy1->follow();
-            }
-            system("cls");
-            switch (worldfield[player1.x][player1.y]){
-                case 'H':
-                    player1.heal();
-                    break;
-                case 'D':
-                    player1.takeDamage(1);
-                    break;
-                case 'R':
-                    player1.increaseRelicPoints();
-                    relcPoints--;
-                default:
-                    break;
-            }
-            if(player1.x == enemy1->x && player1.y == enemy1->y){
-                player1.takeDamage(2);
-                delete(enemy1);
-            }
-            worldfield[player1.x][player1.y] = '-';
-            worldPrinter(player1,worldfield,cnt,enemy1);
-            cout <<"HP: " << player1.lifePoints <<endl;
-            cout<< "Relic Points: " << player1.relicPoint << endl;
-        }
-        system("cls");
-        player1.x = 0;
-        player1.y = 0;
-        level++;
-    }
-
+    worldGenerator(worldfield);
+    worldPrinter(player1, worldfield);
     return 0;
 }
     // ... . -. -.. / .... . .-.. .--. / .--. .-.. ...    -Mostafa Mhanna
