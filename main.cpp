@@ -41,27 +41,15 @@ int  worldGenerator(char (&worldfield)[5][5])
     return relicGenerated;
 
 }
-void worldPrinterWithEnemy(Charkter* player, char (&worldfield)[5][5], Enemy* enemy){
+void worldPrinter(Charkter* player, char (&worldfield)[5][5], Enemy* enemy = NULL){
     for(int x = 0; x < 5; x++ ){
         for(int y = 0; y < 5; y++){
             if(player->getX() == x && player->getY() == y){
                 cout <<" X";
                 continue;
             }
-            if(enemy->getX() == x && enemy->getY() == y){
+            if(enemy != NULL && enemy->getX() == x && enemy->getY() == y){
                 cout <<" Y";
-                continue;
-            }
-            cout <<" " << worldfield[x][y];
-        }
-        cout<<""<<endl;
-    }
-}
-void worldPrinterWithoutEnemy(Charkter* player, char (&worldfield)[5][5]){
-    for(int x = 0; x < 5; x++ ){
-        for(int y = 0; y < 5; y++){
-            if(player->getX() == x && player->getY() == y){
-                cout <<" X";
                 continue;
             }
             cout <<" " << worldfield[x][y];
@@ -106,16 +94,16 @@ bool levelGamePlay(int relicPoints,Charkter* player, int enemyDifficulty, char (
     while(relicPoints != 0){
         if(player->getLifePoints() <= 0){
             cout << "Game Over " << endl;
-            cout << "You Collected : " << player->getRelicPoints() << "Relic Points" << endl;
+            cout << "You Collected : " << player->getRelicPoints() << " Relic Points" << endl;
             cout << "You Reached Level :" << level << endl;
             return false;
         }
         if(enemyAlive){
             cout << "A New Enemy has Appear he moves randomly Watch out he also deals a " << enemy1->getAttackEnergey() << " HP Damage !!!" <<endl;
-            worldPrinterWithEnemy(player,worldfield,enemy1);
+            worldPrinter(player,worldfield,enemy1);
         }
         else{
-            worldPrinterWithoutEnemy(player,worldfield);
+            worldPrinter(player,worldfield);
         }
         cout << "HP : " << player->getLifePoints() << endl;
         cout << "Relic collected : " << player->getRelicPoints() << endl;

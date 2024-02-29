@@ -7,7 +7,7 @@ Charkter::Charkter()
 {
     this->x = 0;
     this->y = 0;
-    this->lifePoints = 1;
+    this->lifePoints = 5;
     this->relicPoints = 0;
 }
 

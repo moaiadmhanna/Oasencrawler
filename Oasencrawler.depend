@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1709245756 source:d:\fh technikum\c++\oasencrawler\src\charkter.cpp
+1709246656 source:d:\fh technikum\c++\oasencrawler\src\charkter.cpp
 	"Charkter.h"
 	<iostream>
 	<time.h>
@@ -16,7 +16,7 @@
 1709245400 d:\fh technikum\c++\oasencrawler\include\charkter.h
 	<iostream>
 
-1709245400 source:d:\fh technikum\c++\oasencrawler\main.cpp
+1709249468 source:d:\fh technikum\c++\oasencrawler\main.cpp
 	<iostream>
 	<time.h>
 	<Charkter.h>
