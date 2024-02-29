@@ -3,18 +3,11 @@
 #include <time.h>
 
 using namespace std;
-enum movement{
-    Up,
-    Down,
-    Left,
-    Right
-};
-
 Charkter::Charkter()
 {
     this->x = 0;
     this->y = 0;
-    this->lifePoints = 5;
+    this->lifePoints = 1;
     this->relicPoints = 0;
 }
 
@@ -48,29 +41,33 @@ void Charkter::setRelicPoints(int relicPoint){
 }
 bool Charkter::move()
 {
-    cout << "Please enter your Movement (Up(U)-Down(D)-Left(L)-Right(R))" << endl;
+    cout << "Please enter your Movement (Up(w)-Down(s)-Left(a)-Right(d))" << endl;
     char input;
     cin >> input;
     switch (input)
     {
-        case 'U':
+        case 'w':
+        case 'W':
             if(this->getX() > 0){
-               this->setX(this->getX() - 1);
+               this->x--;
             }
             return true;
-        case 'D':
+        case 's':
+        case 'S':
             if(this->getX() < 4){
-               this->setX(this->getX() + 1);
+               this->x++;
             }
             return true;
-        case 'L':
+        case 'a':
+        case 'A':
             if(this->getY() > 0){
-               this->setY(this->getY() - 1);
+               this->y--;
             }
             return true;
-        case 'R':
+        case 'd':
+        case 'D':
             if(this->getY() < 4){
-               this->setY(this->getY() + 1);
+               this->y++;
             }
             return true;
         default:
@@ -84,16 +81,16 @@ void Charkter::takeDamage(int x,char enemy){
         srand(time(0));
         int randomNumber = 1 + rand()%6;
         if(randomNumber == 1){
-            this->setLifePoints(this->getLifePoints() - 1);
+            this->lifePoints--;
         }
     }
     else{
-        this->setLifePoints(this->getLifePoints() - x);
+        this->lifePoints -= x;
     }
 }
 void Charkter::heal(){
-    this->setLifePoints(this->getLifePoints() + 1);
+    this->lifePoints++;
 }
 void Charkter::increaseRelicPoints(){
-    this->setRelicPoints(this->getRelicPoints() + 1);
+    this->relicPoints++;
 }

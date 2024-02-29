@@ -60,6 +60,6 @@ void Enemy::setAttackEnergy(int attackEnergy){
     this->attackEnergy = attackEnergy;
 }
 void Enemy::move(int x, int y){
-    this->setX(this->getX() + x);
-    this->setY(this->getY() + y);
+    this->x += x;
+    this->y += y;
 }

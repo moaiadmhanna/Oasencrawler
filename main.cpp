@@ -5,18 +5,13 @@
 #include <Enemy.h>
 
 using namespace std;
-
-int randomGenerator(){
-    int x = 1 + rand()%10;
-    return x;
-}
 int  worldGenerator(char (&worldfield)[5][5])
 {
     srand(time(0));
     int relicGenerated = 0; // R counter
     for(int x = 0; x < 5 ; x++){
         for(int y = 0; y < 5; y++){
-            int randomNumber = randomGenerator();
+            int randomNumber = 1 + rand()%10;
             if(x == 0 && y == 0){
                 worldfield[x][y] = '-';
                 continue;
@@ -40,6 +35,7 @@ int  worldGenerator(char (&worldfield)[5][5])
     if(!relicGenerated){
         int xPoistion = rand()%5;
         int yPoistion = rand()%5;
+        relicGenerated++;
         worldfield[xPoistion][yPoistion] = 'R';
     }
     return relicGenerated;
@@ -110,7 +106,8 @@ bool levelGamePlay(int relicPoints,Charkter* player, int enemyDifficulty, char (
     while(relicPoints != 0){
         if(player->getLifePoints() <= 0){
             cout << "Game Over " << endl;
-            cout << "You Collected : " << player->getRelicPoints() << endl;
+            cout << "You Collected : " << player->getRelicPoints() << "Relic Points" << endl;
+            cout << "You Reached Level :" << level << endl;
             return false;
         }
         if(enemyAlive){
@@ -153,7 +150,7 @@ int main()
     char worldfield[5][5];
     while(true){
         int relicPoints = worldGenerator(worldfield);
-        if(level % 5 == 0){enemyDifficulty++;};
+        if(level % 5 == 0){enemyDifficulty++;}
         if(!levelGamePlay(relicPoints,player1,enemyDifficulty,worldfield,level)){break;}
         player1->setX(0);
         player1->setY(0);
