@@ -114,7 +114,7 @@ bool levelGamePlay(int relicPoints,Charkter* player, int enemyDifficulty, char (
             return false;
         }
         if(enemyAlive){
-            cout << "A New Enemy has Appear he move randomly Watch out he also deal a" << enemy1->getAttackEnergey() << "Damage !!!" <<endl;
+            cout << "A New Enemy has Appear he moves randomly Watch out he also deals a " << enemy1->getAttackEnergey() << " HP Damage !!!" <<endl;
             worldPrinterWithEnemy(player,worldfield,enemy1);
         }
         else{
@@ -125,16 +125,15 @@ bool levelGamePlay(int relicPoints,Charkter* player, int enemyDifficulty, char (
         cout << "Current Level : " << level << endl;
         objectMovement(player,enemy1,enemyAlive,worldfield);
         if( enemyAlive && player->getX() == enemy1->getX() && player->getY() == enemy1->getY()){
-            player->takeDamage(enemy1->getAttackEnergey());
+            player->takeDamage(enemy1->getAttackEnergey(),'Y');
             enemyAlive = false;
-            continue;
         }
         switch (worldfield[player->getX()][player->getY()]){
                 case 'H':
                     player->heal();
                     break;
                 case 'D':
-                    player->takeDamage(1);
+                    player->takeDamage(1,'D');
                     break;
                 case 'R':
                     player->increaseRelicPoints();

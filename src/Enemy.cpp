@@ -5,7 +5,7 @@ Enemy::Enemy()
 {
     this->x = 0;
     this->y = 0;
-    this->attackEnergy = 2;
+    this->attackEnergy = 0;
 }
 
 Enemy::~Enemy()

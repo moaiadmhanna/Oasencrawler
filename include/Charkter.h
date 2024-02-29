@@ -19,7 +19,7 @@ class Charkter
         void setRelicPoints(int relicPoint);
         void setLifePoints(int lifePoint);
         bool move();
-        void takeDamage(int x);
+        void takeDamage(int x,char enemy);
         void heal();
         void increaseRelicPoints();
 

@@ -79,8 +79,8 @@ bool Charkter::move()
 
     }
 }
-void Charkter::takeDamage(int x){
-    if(x == 1){
+void Charkter::takeDamage(int x,char enemy){
+    if(enemy == 'D'){
         srand(time(0));
         int randomNumber = 1 + rand()%6;
         if(randomNumber == 1){
