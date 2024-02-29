@@ -26,10 +26,10 @@ class Charkter
     protected:
 
     private:
-        int x = 0;
-        int y = 0;
-        int lifePoints = 0;
-        int relicPoints = 0;
+        int x;
+        int y;
+        int lifePoints;
+        int relicPoints;
 };
 
 #endif // CHARKTER_H

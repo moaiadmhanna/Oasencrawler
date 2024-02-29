@@ -45,7 +45,23 @@ int  worldGenerator(char (&worldfield)[5][5])
     return relicGenerated;
 
 }
-void worldPrinter(Charkter* player, char (&worldfield)[5][5]){
+void worldPrinterWithEnemy(Charkter* player, char (&worldfield)[5][5], Enemy* enemy){
+    for(int x = 0; x < 5; x++ ){
+        for(int y = 0; y < 5; y++){
+            if(player->getX() == x && player->getY() == y){
+                cout <<" X";
+                continue;
+            }
+            if(enemy->getX() == x && enemy->getY() == y){
+                cout <<" Y";
+                continue;
+            }
+            cout <<" " << worldfield[x][y];
+        }
+        cout<<""<<endl;
+    }
+}
+void worldPrinterWithoutEnemy(Charkter* player, char (&worldfield)[5][5]){
     for(int x = 0; x < 5; x++ ){
         for(int y = 0; y < 5; y++){
             if(player->getX() == x && player->getY() == y){
@@ -57,9 +73,8 @@ void worldPrinter(Charkter* player, char (&worldfield)[5][5]){
         cout<<""<<endl;
     }
 }
-void enemyGenerator(int level, char (&worldfield)[5][5],Enemy *enemy){
+void enemyGenerator(char (&worldfield)[5][5],Enemy *enemy, int enemyDifficulty){
     srand(time(0));
-    for(int i = 0; i < level; i++){
         while(true){
             int xTemp = rand()%5;
             int yTemp = 0;
@@ -71,18 +86,80 @@ void enemyGenerator(int level, char (&worldfield)[5][5],Enemy *enemy){
             }
             if((worldfield[xTemp][yTemp] != 'R') && (worldfield[xTemp][yTemp] != 'Y')){
                 enemy->move(xTemp,yTemp);
+                enemy->setAttackEnergy(enemyDifficulty);
                 break;
             }
         }
-    }
 }
+void objectMovement(Charkter* player,Enemy* enemy, bool enemyAlive, char (&worldfield)[5][5]){
+    while(!player->move()){
+
+    }
+    if(enemyAlive){
+        enemy->follow();
+    }
+    system("cls");
+}
+bool levelGamePlay(int relicPoints,Charkter* player, int enemyDifficulty, char (&worldfield)[5][5],int level){
+    Enemy* enemy1 = new Enemy();
+    enemyGenerator(worldfield,enemy1,enemyDifficulty);
+    bool enemyAlive = false;
+    if(enemyDifficulty > 0){
+        enemyAlive = true;
+    }
+    while(relicPoints != 0){
+        if(player->getLifePoints() <= 0){
+            cout << "Game Over " << endl;
+            cout << "You Collected : " << player->getRelicPoints() << endl;
+            return false;
+        }
+        if(enemyAlive){
+            cout << "A New Enemy has Appear he move randomly Watch out he also deal a" << enemy1->getAttackEnergey() << "Damage !!!" <<endl;
+            worldPrinterWithEnemy(player,worldfield,enemy1);
+        }
+        else{
+            worldPrinterWithoutEnemy(player,worldfield);
+        }
+        cout << "HP : " << player->getLifePoints() << endl;
+        cout << "Relic collected : " << player->getRelicPoints() << endl;
+        cout << "Current Level : " << level << endl;
+        objectMovement(player,enemy1,enemyAlive,worldfield);
+        if( enemyAlive && player->getX() == enemy1->getX() && player->getY() == enemy1->getY()){
+            player->takeDamage(enemy1->getAttackEnergey());
+            enemyAlive = false;
+            continue;
+        }
+        switch (worldfield[player->getX()][player->getY()]){
+                case 'H':
+                    player->heal();
+                    break;
+                case 'D':
+                    player->takeDamage(1);
+                    break;
+                case 'R':
+                    player->increaseRelicPoints();
+                    relicPoints--;
+                default:
+                    break;
+            }
+        worldfield[player->getX()][player->getY()] = '-';
+    }
+    return true;
+};
 int main()
 {
     Charkter* player1 = new Charkter();
-    int level = 1;
+    int level = 5;
+    int enemyDifficulty = 0; // The Enemy Difficulty
     char worldfield[5][5];
-    worldGenerator(worldfield);
-    worldPrinter(player1, worldfield);
+    while(true){
+        int relicPoints = worldGenerator(worldfield);
+        if(level % 5 == 0){enemyDifficulty++;};
+        if(!levelGamePlay(relicPoints,player1,enemyDifficulty,worldfield,level)){break;}
+        player1->setX(0);
+        player1->setY(0);
+        level++;
+    }
     return 0;
 }
     // ... . -. -.. / .... . .-.. .--. / .--. .-.. ...    -Mostafa Mhanna

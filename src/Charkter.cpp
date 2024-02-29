@@ -12,10 +12,10 @@ enum movement{
 
 Charkter::Charkter()
 {
-    this->setX(0);
-    this->setY(0);
-    this->setLifePoints(5);
-    this->setRelicPoints(0);
+    this->x = 0;
+    this->y = 0;
+    this->lifePoints = 5;
+    this->relicPoints = 0;
 }
 
 Charkter::~Charkter()
@@ -35,16 +35,16 @@ int Charkter::getRelicPoints() const {
     return this->relicPoints;
 }
 void Charkter::setX(int x){
-    this->x +=x;
+    this->x = x ;
 }
 void Charkter::setY(int y){
-    this->y+=y;
+    this->y = y;
 }
 void Charkter::setLifePoints(int lifePoint){
-    this->lifePoints+=lifePoint;
+    this->lifePoints = lifePoint;
 }
 void Charkter::setRelicPoints(int relicPoint){
-    this->relicPoints+=relicPoint;
+    this->relicPoints = relicPoint;
 }
 bool Charkter::move()
 {
@@ -55,22 +55,22 @@ bool Charkter::move()
     {
         case 'U':
             if(this->getX() > 0){
-               this->setX(-1);
+               this->setX(this->getX() - 1);
             }
             return true;
         case 'D':
             if(this->getX() < 4){
-               this->setX(1);
+               this->setX(this->getX() + 1);
             }
             return true;
         case 'L':
             if(this->getY() > 0){
-               this->setY(-1);
+               this->setY(this->getY() - 1);
             }
             return true;
         case 'R':
             if(this->getY() < 4){
-               this->setY(1);
+               this->setY(this->getY() + 1);
             }
             return true;
         default:
@@ -84,16 +84,16 @@ void Charkter::takeDamage(int x){
         srand(time(0));
         int randomNumber = 1 + rand()%6;
         if(randomNumber == 1){
-            this->setLifePoints(-1);
+            this->setLifePoints(this->getLifePoints() - 1);
         }
     }
     else{
-        this->setLifePoints(x);
+        this->setLifePoints(this->getLifePoints() - x);
     }
 }
 void Charkter::heal(){
-    this->setLifePoints(1);
+    this->setLifePoints(this->getLifePoints() + 1);
 }
 void Charkter::increaseRelicPoints(){
-    this->setRelicPoints(1);
+    this->setRelicPoints(this->getRelicPoints() + 1);
 }
