@@ -1,6 +1,7 @@
 #include "Enemy.h"
 #include <iostream>
 #include <time.h>
+#include "defaults.h"
 Enemy::Enemy()
 {
     this->x = 0;
@@ -49,7 +50,7 @@ void Enemy::follow(){
             yPoistion--;
             break;
     }
-    if(xPoistion < 5 && yPoistion < 5 && xPoistion > 0 && yPoistion >0){
+    if(xPoistion < WORLD_LENGTH && yPoistion < WORLD_LENGTH && xPoistion > 0 && yPoistion >0){
         this->setX(xPoistion);
         this->setY(yPoistion);
         break;

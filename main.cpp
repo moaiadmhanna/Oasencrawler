@@ -3,14 +3,15 @@
 #include <Charkter.h>
 #include <windows.h>
 #include <Enemy.h>
+#include <defaults.h>
 
 using namespace std;
-int  worldGenerator(char (&worldfield)[5][5])
+int  worldGenerator(char (&worldfield)[WORLD_LENGTH][WORLD_LENGTH])
 {
     srand(time(0));
     int relicGenerated = 0; // R counter
-    for(int x = 0; x < 5 ; x++){
-        for(int y = 0; y < 5; y++){
+    for(int x = 0; x < WORLD_LENGTH ; x++){
+        for(int y = 0; y < WORLD_LENGTH; y++){
             int randomNumber = 1 + rand()%10;
             if(x == 0 && y == 0){
                 worldfield[x][y] = '-';
@@ -33,17 +34,22 @@ int  worldGenerator(char (&worldfield)[5][5])
     }
     // when there is no relic in the field
     if(!relicGenerated){
-        int xPoistion = rand()%5;
-        int yPoistion = rand()%5;
+        int xPoistion = rand()%WORLD_LENGTH;
+        int yPoistion = rand()%WORLD_LENGTH;
         relicGenerated++;
         worldfield[xPoistion][yPoistion] = 'R';
     }
     return relicGenerated;
 
 }
-void worldPrinter(Charkter* player, char (&worldfield)[5][5], Enemy* enemy = NULL){
-    for(int x = 0; x < 5; x++ ){
-        for(int y = 0; y < 5; y++){
+void worldPrinter(Charkter* player, char (&worldfield)[WORLD_LENGTH][WORLD_LENGTH], Enemy* enemy = NULL){
+    for(int i = 0; i<= (WORLD_LENGTH*2)+2 ; i++){
+        cout << "-";
+    }
+    cout << "" << endl;
+    for(int x = 0; x < WORLD_LENGTH; x++ ){
+            cout << "|";
+        for(int y = 0; y < WORLD_LENGTH; y++){
             if(player->getX() == x && player->getY() == y){
                 cout <<" X";
                 continue;
@@ -54,19 +60,23 @@ void worldPrinter(Charkter* player, char (&worldfield)[5][5], Enemy* enemy = NUL
             }
             cout <<" " << worldfield[x][y];
         }
-        cout<<""<<endl;
+        cout<<" |"<<endl;
     }
+    for(int i = 0; i<= (WORLD_LENGTH*2)+2 ; i++){
+        cout << "-";
+    }
+    cout << "" << endl;
 }
-void enemyGenerator(char (&worldfield)[5][5],Enemy *enemy, int enemyDifficulty){
+void enemyGenerator(char (&worldfield)[WORLD_LENGTH][WORLD_LENGTH],Enemy *enemy, int enemyDifficulty){
     srand(time(0));
         while(true){
-            int xTemp = rand()%5;
+            int xTemp = rand()%WORLD_LENGTH;
             int yTemp = 0;
             if(xTemp < 3){
                 yTemp = (rand()%2)+3;
             }
             else{
-                yTemp = rand()%5;
+                yTemp = rand()%WORLD_LENGTH;
             }
             if((worldfield[xTemp][yTemp] != 'R') && (worldfield[xTemp][yTemp] != 'Y')){
                 enemy->move(xTemp,yTemp);
@@ -75,7 +85,7 @@ void enemyGenerator(char (&worldfield)[5][5],Enemy *enemy, int enemyDifficulty){
             }
         }
 }
-void objectMovement(Charkter* player,Enemy* enemy, bool enemyAlive, char (&worldfield)[5][5]){
+void objectMovement(Charkter* player,Enemy* enemy, bool enemyAlive, char (&worldfield)[WORLD_LENGTH][WORLD_LENGTH]){
     while(!player->move()){
 
     }
@@ -84,7 +94,7 @@ void objectMovement(Charkter* player,Enemy* enemy, bool enemyAlive, char (&world
     }
     system("cls");
 }
-bool levelGamePlay(int relicPoints,Charkter* player, int enemyDifficulty, char (&worldfield)[5][5],int level){
+bool levelGamePlay(int relicPoints,Charkter* player, int enemyDifficulty, char (&worldfield)[WORLD_LENGTH][WORLD_LENGTH],int level){
     Enemy* enemy1 = new Enemy();
     enemyGenerator(worldfield,enemy1,enemyDifficulty);
     bool enemyAlive = false;
@@ -107,6 +117,7 @@ bool levelGamePlay(int relicPoints,Charkter* player, int enemyDifficulty, char (
         }
         cout << "HP : " << player->getLifePoints() << endl;
         cout << "Relic collected : " << player->getRelicPoints() << endl;
+        cout << "Current Agility : " << player->getAgility() << " Endurance: " << player->getEndurance() << " Knowledge: " << player->getKnowledge() << endl;
         cout << "Current Level : " << level << endl;
         objectMovement(player,enemy1,enemyAlive,worldfield);
         if( enemyAlive && player->getX() == enemy1->getX() && player->getY() == enemy1->getY()){
@@ -135,7 +146,7 @@ int main()
     Charkter* player1 = new Charkter();
     int level = 5;
     int enemyDifficulty = 0; // The Enemy Difficulty
-    char worldfield[5][5];
+    char worldfield[WORLD_LENGTH][WORLD_LENGTH];
     while(true){
         int relicPoints = worldGenerator(worldfield);
         if(level % 5 == 0){enemyDifficulty++;}

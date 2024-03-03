@@ -1,6 +1,7 @@
 #include "Charkter.h"
 #include <iostream>
 #include <time.h>
+#include "defaults.h"
 
 using namespace std;
 Charkter::Charkter()
@@ -9,6 +10,9 @@ Charkter::Charkter()
     this->y = 0;
     this->lifePoints = 5;
     this->relicPoints = 0;
+    this->agility = 1;
+    this->endurance = 1;
+    this->knowledge = 1;
 }
 
 Charkter::~Charkter()
@@ -27,6 +31,15 @@ int Charkter::getLifePoints() const{
 int Charkter::getRelicPoints() const {
     return this->relicPoints;
 }
+int Charkter::getAgility() const{
+    return this->agility;
+}
+int Charkter::getEndurance() const{
+    return this->endurance;
+}
+int Charkter::getKnowledge() const{
+    return this->knowledge;
+}
 void Charkter::setX(int x){
     this->x = x ;
 }
@@ -38,6 +51,15 @@ void Charkter::setLifePoints(int lifePoint){
 }
 void Charkter::setRelicPoints(int relicPoint){
     this->relicPoints = relicPoint;
+}
+void Charkter::setAgility(int agilityPoint){
+    this->agility = agilityPoint;
+}
+void Charkter::setEndurance(int endurancePoint){
+    this->endurance = endurancePoint;
+}
+void Charkter::setKnowledge(int knowledgePoint){
+    this->knowledge = knowledgePoint;
 }
 bool Charkter::move()
 {
@@ -54,7 +76,7 @@ bool Charkter::move()
             return true;
         case 's':
         case 'S':
-            if(this->getX() < 4){
+            if(this->getX() < WORLD_LENGTH-1){
                this->x++;
             }
             return true;
@@ -66,7 +88,7 @@ bool Charkter::move()
             return true;
         case 'd':
         case 'D':
-            if(this->getY() < 4){
+            if(this->getY() < WORLD_LENGTH-1){
                this->y++;
             }
             return true;

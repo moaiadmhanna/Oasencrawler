@@ -9,15 +9,21 @@ class Charkter
 {
     public:
         Charkter();
-        virtual ~Charkter();
+        ~Charkter();
         int getX() const;
         int getY() const;
         int getRelicPoints() const;
         int getLifePoints() const;
+        int getAgility() const;
+        int getEndurance() const;
+        int getKnowledge() const;
         void setX(int x);
         void setY(int y);
         void setRelicPoints(int relicPoint);
         void setLifePoints(int lifePoint);
+        void setAgility(int agilityPoint);
+        void setEndurance(int endurancePoint);
+        void setKnowledge(int knowledgePoint);
         bool move();
         void takeDamage(int x,char enemy);
         void heal();
@@ -30,6 +36,9 @@ class Charkter
         int y;
         int lifePoints;
         int relicPoints;
+        int agility;
+        int endurance;
+        int knowledge;
 };
 
 #endif // CHARKTER_H
