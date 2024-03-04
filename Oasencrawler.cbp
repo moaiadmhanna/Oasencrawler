@@ -34,12 +34,15 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="defaults.h" />
 		<Unit filename="include/Charkter.h" />
 		<Unit filename="include/Enemy.h" />
+		<Unit filename="include/defaults.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Charkter.cpp" />
 		<Unit filename="src/Enemy.cpp" />
+		<Unit filename="src/challenges.cpp" />
+		<Unit filename="src/challenges.h" />
+		<Unit filename="src/defaults.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

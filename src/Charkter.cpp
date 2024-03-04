@@ -10,9 +10,9 @@ Charkter::Charkter()
     this->y = 0;
     this->lifePoints = 5;
     this->relicPoints = 0;
-    this->agility = 1;
-    this->endurance = 1;
-    this->knowledge = 1;
+    this->agility = 0;
+    this->endurance = 0;
+    this->knowledge = 0;
 }
 
 Charkter::~Charkter()
@@ -99,7 +99,7 @@ bool Charkter::move()
     }
 }
 void Charkter::takeDamage(int x,char enemy){
-    if(enemy == 'D'){
+    if(enemy == '*'){
         srand(time(0));
         int randomNumber = 1 + rand()%6;
         if(randomNumber == 1){
@@ -115,4 +115,24 @@ void Charkter::heal(){
 }
 void Charkter::increaseRelicPoints(){
     this->relicPoints++;
+}
+void Charkter::findItem(){
+    srand(time(0));
+    int randomNumber = 1 + rand()%4;
+    switch (randomNumber){
+    case 1:
+        break;
+    case 2:
+        cout << "You Found 1 item: Step Reducer Agility increased"<<endl;
+        this->agility++;
+        break;
+    case 3:
+        cout << "You Found 1 item: Hint Endurance increased"<<endl;
+        this->endurance++;
+        break;
+    case 4:
+        cout << "You Found 1 item: Einstein potion Knowledge increased"<<endl;
+        this->knowledge++;
+        break;
+    }
 }

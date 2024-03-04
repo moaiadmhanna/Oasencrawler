@@ -26,6 +26,7 @@ class Charkter
         void setKnowledge(int knowledgePoint);
         bool move();
         void takeDamage(int x,char enemy);
+        void findItem();
         void heal();
         void increaseRelicPoints();
 

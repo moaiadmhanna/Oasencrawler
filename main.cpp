@@ -4,6 +4,7 @@
 #include <windows.h>
 #include <Enemy.h>
 #include <defaults.h>
+#include <string>
 
 using namespace std;
 int  worldGenerator(char (&worldfield)[WORLD_LENGTH][WORLD_LENGTH])
@@ -21,10 +22,10 @@ int  worldGenerator(char (&worldfield)[WORLD_LENGTH][WORLD_LENGTH])
                 worldfield[x][y] = '-'; // Empty Field
             }
             else if(randomNumber <= 8 && randomNumber >4){
-                worldfield[x][y] = 'D'; // Danger Field
+                worldfield[x][y] = '*'; // Danger Field
             }
             else if (randomNumber == 9){
-                worldfield[x][y] = 'H'; // Health Field
+                worldfield[x][y] = '+'; // Health Field
             }
             else{
                 relicGenerated ++;
@@ -41,6 +42,80 @@ int  worldGenerator(char (&worldfield)[WORLD_LENGTH][WORLD_LENGTH])
     }
     return relicGenerated;
 
+}
+
+char getRandomMove(int& x, int& y) {
+    int randomNumber = 1 + rand() % 4;
+    switch (randomNumber) {
+        case 1: x--; return 'w';
+        case 2: y++; return 'd';
+        case 3: x++; return 's';
+        case 4: y--; return 'a';
+    }
+    return '\0'; // Default case, should not happen
+}
+
+string agilityFieldGenrator(char (&agilityField)[AGILITY_FIELD_LENGTH][AGILITY_FIELD_LENGTH], int stepsCounter) {
+    const int centerX = AGILITY_FIELD_LENGTH / 2;
+    const int centerY = AGILITY_FIELD_LENGTH / 2;
+
+    // Initialize the agilityField with '*'
+    for (int x = 0; x < AGILITY_FIELD_LENGTH; x++) {
+        for (int y = 0; y < AGILITY_FIELD_LENGTH; y++) {
+            agilityField[x][y] = (x == centerX && y == centerY) ? 'X' : '*';
+        }
+    }
+
+    string solution = "";
+    int xPosition = centerX;
+    int yPosition = centerY;
+    srand(time(0));
+
+    for (int i = 0; i < stepsCounter; i++) {
+        int attempts = 0;
+
+        while (true) {
+            if (attempts > 4) {
+                break;
+            }
+
+            int xTemp = xPosition;
+            int yTemp = yPosition;
+            char move = getRandomMove(xTemp, yTemp);
+
+            if (xTemp >= 0 && yTemp >= 0 && xTemp < AGILITY_FIELD_LENGTH && yTemp < AGILITY_FIELD_LENGTH &&
+                agilityField[xTemp][yTemp] != 'X' && agilityField[xTemp][yTemp] != '-') {
+
+                solution += move;
+                xPosition = xTemp;
+                yPosition = yTemp;
+                agilityField[xPosition][yPosition] = '-';
+                break;
+            }
+
+            attempts++;
+        }
+    }
+
+    agilityField[xPosition][yPosition] = 'O';
+    return solution;
+}
+void agilityFieldPrinter(char (&agilityField)[AGILITY_FIELD_LENGTH][AGILITY_FIELD_LENGTH]){
+    for(int i = 0; i<= (AGILITY_FIELD_LENGTH*2)+2 ; i++){
+        cout << "-";
+    }
+    cout << "" << endl;
+    for(int x = 0; x < AGILITY_FIELD_LENGTH; x++ ){
+            cout << "|";
+        for(int y = 0; y < AGILITY_FIELD_LENGTH; y++){
+            cout <<" " << agilityField[x][y];
+        }
+        cout<<" |"<<endl;
+    }
+    for(int i = 0; i<= (AGILITY_FIELD_LENGTH*2)+2 ; i++){
+        cout << "-";
+    }
+    cout << "" << endl;
 }
 void worldPrinter(Charkter* player, char (&worldfield)[WORLD_LENGTH][WORLD_LENGTH], Enemy* enemy = NULL){
     for(int i = 0; i<= (WORLD_LENGTH*2)+2 ; i++){
@@ -125,15 +200,17 @@ bool levelGamePlay(int relicPoints,Charkter* player, int enemyDifficulty, char (
             enemyAlive = false;
         }
         switch (worldfield[player->getX()][player->getY()]){
-                case 'H':
+                case '+':
                     player->heal();
+                    player->findItem();
                     break;
-                case 'D':
-                    player->takeDamage(1,'D');
+                case '*':
+                    player->takeDamage(1,'*');
                     break;
                 case 'R':
                     player->increaseRelicPoints();
                     relicPoints--;
+                    player->findItem();
                 default:
                     break;
             }
@@ -141,10 +218,10 @@ bool levelGamePlay(int relicPoints,Charkter* player, int enemyDifficulty, char (
     }
     return true;
 };
-int main()
+int main2()
 {
     Charkter* player1 = new Charkter();
-    int level = 5;
+    int level = 1;
     int enemyDifficulty = 0; // The Enemy Difficulty
     char worldfield[WORLD_LENGTH][WORLD_LENGTH];
     while(true){
@@ -156,5 +233,10 @@ int main()
         level++;
     }
     return 0;
+}
+int main(){
+    char agilityField[AGILITY_FIELD_LENGTH][AGILITY_FIELD_LENGTH];
+    cout << agilityFieldGenrator(agilityField,8)<<endl;
+    agilityFieldPrinter(agilityField);
 }
     // ... . -. -.. / .... . .-.. .--. / .--. .-.. ...    -Mostafa Mhanna
