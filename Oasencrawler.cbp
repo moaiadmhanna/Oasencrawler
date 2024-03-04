@@ -40,9 +40,6 @@
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Charkter.cpp" />
 		<Unit filename="src/Enemy.cpp" />
-		<Unit filename="src/challenges.cpp" />
-		<Unit filename="src/challenges.h" />
-		<Unit filename="src/defaults.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

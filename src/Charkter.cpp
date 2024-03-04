@@ -118,21 +118,21 @@ void Charkter::increaseRelicPoints(){
 }
 void Charkter::findItem(){
     srand(time(0));
-    int randomNumber = 1 + rand()%4;
+    int randomNumber = 1 + rand()%6;
     switch (randomNumber){
-    case 1:
-        break;
     case 2:
-        cout << "You Found 1 item: Step Reducer Agility increased"<<endl;
+        cout << "You Found 1 item: (Step Reducer)   Agility increased"<<endl;
         this->agility++;
         break;
     case 3:
-        cout << "You Found 1 item: Hint Endurance increased"<<endl;
+        cout << "You Found 1 item: (Hint)  Endurance increased"<<endl;
         this->endurance++;
         break;
     case 4:
-        cout << "You Found 1 item: Einstein potion Knowledge increased"<<endl;
+        cout << "You Found 1 item: (Einstein potion) Knowledge increased"<<endl;
         this->knowledge++;
+        break;
+    default:
         break;
     }
 }
